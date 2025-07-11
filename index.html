@@ -5,135 +5,182 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SAFE MARINE</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet"/>
   <style>
     :root {
       --safe-color: #2ecc71;
       --marine-color: #3498db;
       --dark-bg: #0a3d62;
+      --light-bg: #f4f9fb;
     }
 
     * {
-      margin: 0; padding: 0; box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
       scroll-behavior: smooth;
     }
 
     body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(120deg, #eef9ff, #d9f4ec);
-      animation: gradientBG 20s ease infinite;
-      background-size: 300% 300%;
+      background: linear-gradient(135deg, #eafaf1, #dcefff);
+      background-size: 400% 400%;
+      animation: gradientBG 30s ease infinite;
       color: #333;
-      overflow-x: hidden;
+      line-height: 1.6;
     }
 
     @keyframes gradientBG {
-      0%,100% { background-position: 0% 50%; }
+      0%, 100% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
     }
 
     header {
       background: var(--dark-bg);
-      padding: 20px;
+      padding: 25px 15px;
       text-align: center;
       color: white;
       position: sticky;
       top: 0;
       z-index: 1000;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     .brand {
-      font-size: 2.3rem;
+      font-size: 2.5rem;
       font-weight: bold;
+      letter-spacing: 1px;
     }
 
-    .brand .safe { color: var(--safe-color); }
-    .brand .marine { color: var(--marine-color); }
-
-    nav {
-      margin-top: 10px;
-      animation: fadeIn 1.5s ease-in;
-    }
+    .safe { color: var(--safe-color); }
+    .marine { color: var(--marine-color); }
 
     nav a {
       color: white;
       text-decoration: none;
-      margin: 0 15px;
+      margin: 0 18px;
       font-weight: 600;
-      transition: color 0.3s;
+      position: relative;
     }
 
-    nav a:hover { color: var(--safe-color); }
+    nav a::after {
+      content: '';
+      display: block;
+      width: 0%;
+      height: 2px;
+      background: var(--safe-color);
+      transition: width 0.3s;
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .user-menu {
+      position: relative;
+      margin-right: 20px;
+    }
+
+    .user-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: white;
+      color: var(--dark-bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 50px;
+      right: 0;
+      background: white;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      min-width: 140px;
+    }
+
+    .dropdown a {
+      display: block;
+      padding: 10px;
+      color: #333;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .dropdown a:hover {
+      background: #f4f4f4;
+    }
 
     .hero {
-      height: 100vh;
-      background: linear-gradient(to bottom, rgba(10,61,98,0.7), rgba(0,0,0,0.7)),
-        url('https://images.unsplash.com/photo-1504610926078-a1611febcad3?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      height: 90vh;
+      background: linear-gradient(rgba(10,61,98,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1504610926078-a1611febcad3?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
       color: white;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-      animation: fadeIn 2s ease;
+      padding: 0 15px;
     }
 
     .hero h1 {
       font-size: 3.5rem;
-      margin-bottom: 15px;
-      animation: floatUp 1s ease-in-out;
+      animation: fadeDown 1s ease-out;
     }
 
     .hero p {
       font-size: 1.3rem;
-      animation: slideUp 1.2s ease-in;
+      margin-top: 15px;
+      animation: fadeUp 1.2s ease-out;
     }
 
     .hero a {
-      margin-top: 30px;
-      padding: 14px 32px;
+      margin-top: 35px;
       background: var(--safe-color);
       color: #fff;
-      border-radius: 30px;
+      padding: 14px 35px;
+      font-size: 1.1rem;
+      border-radius: 50px;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 600;
       transition: background 0.3s ease;
     }
 
-    .hero a:hover { background: #27ae60; }
+    .hero a:hover {
+      background: #27ae60;
+    }
 
-    @keyframes floatUp {
-      from { transform: translateY(50px); opacity: 0; }
+    @keyframes fadeDown {
+      from { transform: translateY(-40px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
 
-    @keyframes slideUp {
-      from { transform: translateY(60px); opacity: 0; }
+    @keyframes fadeUp {
+      from { transform: translateY(40px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .section {
+    section {
       padding: 80px 20px;
       max-width: 1200px;
       margin: auto;
-      opacity: 0;
-      transform: translateY(60px);
-      transition: all 1s ease;
     }
 
-    .section.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .section h2 {
+    h2 {
       text-align: center;
       font-size: 2.5rem;
       margin-bottom: 50px;
@@ -142,46 +189,48 @@
 
     .services {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     }
 
     .service {
       background: white;
-      padding: 25px;
       border-radius: 12px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      padding: 25px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
       text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: all 0.3s ease;
     }
 
     .service:hover {
       transform: translateY(-10px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
     }
 
     .service h3 {
       color: var(--marine-color);
+      font-size: 1.2rem;
       margin-bottom: 10px;
     }
 
     .about {
-      background: #f0f0f0;
+      background: #ffffff;
       border-radius: 12px;
-      padding: 50px 30px;
+      padding: 40px 25px;
       text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     }
 
     .contact form {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
       max-width: 600px;
       margin: auto;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
       display: flex;
       flex-direction: column;
       gap: 15px;
-      background: #ffffff;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
     }
 
     .contact input, .contact textarea {
@@ -195,9 +244,9 @@
       padding: 14px;
       background: var(--marine-color);
       color: white;
-      font-weight: bold;
       border: none;
       border-radius: 8px;
+      font-weight: bold;
       cursor: pointer;
       transition: background 0.3s ease;
     }
@@ -208,22 +257,19 @@
 
     .success-message {
       display: none;
-      margin-top: 20px;
+      text-align: center;
+      margin-top: 15px;
       color: var(--safe-color);
       font-weight: bold;
-      font-size: 1.1rem;
-      text-align: center;
-      animation: fadeSuccess 1s ease forwards;
+      animation: fadeSuccess 0.7s ease;
     }
 
     .success-message i {
-      color: var(--safe-color);
       margin-right: 8px;
-      font-size: 1.5rem;
     }
 
     @keyframes fadeSuccess {
-      from { opacity: 0; transform: scale(0.9); }
+      from { opacity: 0; transform: scale(0.95); }
       to { opacity: 1; transform: scale(1); }
     }
 
@@ -231,126 +277,117 @@
       background: var(--dark-bg);
       color: white;
       text-align: center;
-      padding: 25px;
-      margin-top: 60px;
+      padding: 30px 15px;
     }
 
     footer a {
       color: var(--safe-color);
       margin: 0 10px;
-      text-decoration: none;
-      font-size: 1.2rem;
-    }
-
-    @media (max-width: 600px) {
-      .hero h1 { font-size: 2.3rem; }
-      .section h2 { font-size: 1.7rem; }
+      font-size: 1.3rem;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="brand"><span class="safe">SAFE</span> <span class="marine">MARINE</span></div>
-    <nav>
-      <a href="#services">Services</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
-
-  <section class="hero">
-    <h1>Shipping Solutions That Deliver Confidence</h1>
-    <p>Air • Sea • Land | Warehousing | Customs Clearance | Worldwide Network</p>
-    <a href="#contact">Request a Quote</a>
-  </section>
-
-  <section id="services" class="section">
-    <h2>Our Services</h2>
-    <div class="services">
-      <div class="service">
-        <h3>🌍 Air & Sea Freight</h3>
-        <p>Global import & export shipping via certified IATA air partners and trusted vessel routes.</p>
-      </div>
-      <div class="service">
-        <h3>🚛 Inland Transport</h3>
-        <p>Truck & rail logistics tailored to your port, warehouse, or final destination.</p>
-      </div>
-      <div class="service">
-        <h3>🮾 Customs Clearance</h3>
-        <p>Licensed brokers handle your documentation, tariffs, HS codes and cargo release.</p>
-      </div>
-      <div class="service">
-        <h3>🏢 Storage & Warehousing</h3>
-        <p>Safe, dry, and temperature-controlled environments for short- or long-term storage.</p>
-      </div>
+<header>
+  <div class="brand"><span class="safe">SAFE</span> <span class="marine">MARINE</span></div>
+  <nav>
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="user-menu" id="userMenu" style="display: none;">
+    <div class="user-icon" id="userIcon">U</div>
+    <div class="dropdown" id="dropdownMenu">
+      <a href="#">Settings</a>
+      <a href="#" onclick="logout()">Logout</a>
     </div>
-  </section>
+  </div>
+</header>
 
-  <section id="about" class="section about">
-    <h2>About SAFE MARINE</h2>
-    <p>SAFE MARINE is a logistics powerhouse with global reach and local expertise. With a passion for precision, we connect continents and streamline cargo journeys. Whether you're moving pallets or full containers, we make sure your shipment arrives safely and on time — every time.</p>
-  </section>
+<section class="hero">
+  <h1>Shipping Solutions That Deliver Confidence</h1>
+  <p>Air • Sea • Land | Warehousing | Customs Clearance | Worldwide Network</p>
+  <a href="#contact">Request a Quote</a>
+</section>
 
-  <section id="contact" class="section contact">
-    <h2>Contact SAFE MARINE</h2>
-    <form action="https://formspree.io/f/xovwgwpr" method="POST">
-      <input type="text" name="first_name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Your Gmail Address" required>
-      <textarea name="message" rows="5" placeholder="How can we help you?" required></textarea>
-      <button type="submit">Send Message</button>
-      <div class="success-message" id="success">
-        <i class="fas fa-check-circle"></i> Message Sent Successfully!
-      </div>
-    </form>
-  </section>
+<section id="services">
+  <h2>Our Services</h2>
+  <div class="services">
+    <div class="service"><h3>🌍 Air & Sea Freight</h3><p>Global import & export shipping via certified IATA air partners and trusted vessel routes.</p></div>
+    <div class="service"><h3>🚛 Inland Transport</h3><p>Truck & rail logistics tailored to your port, warehouse, or final destination.</p></div>
+    <div class="service"><h3>🛃 Customs Clearance</h3><p>Licensed brokers handle your documentation, tariffs, HS codes and cargo release.</p></div>
+    <div class="service"><h3>🏢 Storage & Warehousing</h3><p>Safe, dry, and temperature-controlled environments for short- or long-term storage.</p></div>
+  </div>
+</section>
 
-  <footer>
-    <p>© 2025 <span class="safe">SAFE</span> <span class="marine">MARINE</span> • All Rights Reserved</p>
-    <p>
-      <a href="#"><i class="fab fa-facebook"></i></a>
-      <a href="#"><i class="fab fa-linkedin"></i></a>
-      <a href="#"><i class="fab fa-instagram"></i></a>
-    </p>
-  </footer>
+<section id="about" class="about">
+  <h2>About SAFE MARINE</h2>
+  <p>SAFE MARINE is a logistics powerhouse with global reach and local expertise. We connect continents and streamline cargo journeys. Whether you're moving pallets or full containers, we ensure your shipment arrives safely and on time — every time.</p>
+</section>
 
-  <script>
-    const sections = document.querySelectorAll('.section');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('show');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
+<section id="contact" class="contact">
+  <h2>Contact SAFE MARINE</h2>
+  <form action="https://formspree.io/f/xovwgwpr" method="POST">
+    <input type="text" name="first_name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Gmail Address" required>
+    <textarea name="message" rows="5" placeholder="How can we help you?" required></textarea>
+    <button type="submit">Send Message</button>
+    <div class="success-message" id="success"><i class="fas fa-check-circle"></i> Message Sent Successfully!</div>
+  </form>
+</section>
 
-    sections.forEach(section => {
-      observer.observe(section);
+<footer>
+  <p>© 2025 <span class="safe">SAFE</span> <span class="marine">MARINE</span> • All Rights Reserved</p>
+  <div>
+    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="#"><i class="fab fa-linkedin"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+  </div>
+</footer>
+
+<script>
+  // Redirect if user not logged in
+  const currentUser = localStorage.getItem("loggedUser");
+  if (!currentUser) {
+    window.location.href = "login.html";
+  } else {
+    document.getElementById("userMenu").style.display = "block";
+    document.getElementById("userIcon").innerText = currentUser.charAt(0).toUpperCase();
+  }
+
+  // Dropdown toggle
+  document.getElementById("userIcon").addEventListener("click", () => {
+    const menu = document.getElementById("dropdownMenu");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+  });
+
+  function logout() {
+    localStorage.removeItem("loggedUser");
+    window.location.href = "login.html";
+  }
+
+  // Form success animation
+  const form = document.querySelector("form");
+  const success = document.getElementById("success");
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    const data = new FormData(form);
+    fetch(form.action, {
+      method: "POST",
+      body: data,
+      headers: { Accept: "application/json" }
+    }).then(response => {
+      if (response.ok) {
+        success.style.display = "block";
+        form.reset();
+        setTimeout(() => { success.style.display = "none"; }, 5000);
+      } else {
+        alert("Error: Message not sent.");
+      }
     });
-
-    // Success animation after submission
-    const form = document.querySelector("form");
-    const success = document.getElementById("success");
-
-    form.addEventListener("submit", function(e) {
-      e.preventDefault();
-      const data = new FormData(form);
-      fetch(form.action, {
-        method: "POST",
-        body: data,
-        headers: { Accept: "application/json" }
-      })
-      .then(response => {
-        if (response.ok) {
-          success.style.display = "block";
-          form.reset();
-        } else {
-          alert("Error: Could not send message.");
-        }
-      });
-    });
-  </script>
+  });
+</script>
 
 </body>
 </html>
