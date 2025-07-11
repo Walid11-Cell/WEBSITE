@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -45,9 +44,6 @@
       top: 0;
       z-index: 1000;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
     }
 
     .brand {
@@ -58,6 +54,10 @@
 
     .safe { color: var(--safe-color); }
     .marine { color: var(--marine-color); }
+
+    nav {
+      margin-top: 12px;
+    }
 
     nav a {
       color: white;
@@ -81,48 +81,6 @@
 
     nav a:hover::after {
       width: 100%;
-    }
-
-    .user-menu {
-      position: relative;
-      margin-right: 20px;
-    }
-
-    .user-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: white;
-      color: var(--dark-bg);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .dropdown {
-      display: none;
-      position: absolute;
-      top: 50px;
-      right: 0;
-      background: white;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-      border-radius: 8px;
-      overflow: hidden;
-      min-width: 140px;
-    }
-
-    .dropdown a {
-      display: block;
-      padding: 10px;
-      color: #333;
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    .dropdown a:hover {
-      background: #f4f4f4;
     }
 
     .hero {
@@ -285,6 +243,12 @@
       margin: 0 10px;
       font-size: 1.3rem;
     }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2.2rem; }
+      .hero p { font-size: 1.1rem; }
+      h2 { font-size: 1.8rem; }
+    }
   </style>
 </head>
 <body>
@@ -296,13 +260,6 @@
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
   </nav>
-  <div class="user-menu" id="userMenu" style="display: none;">
-    <div class="user-icon" id="userIcon">U</div>
-    <div class="dropdown" id="dropdownMenu">
-      <a href="#">Settings</a>
-      <a href="#" onclick="logout()">Logout</a>
-    </div>
-  </div>
 </header>
 
 <section class="hero">
@@ -314,16 +271,28 @@
 <section id="services">
   <h2>Our Services</h2>
   <div class="services">
-    <div class="service"><h3>🌍 Air & Sea Freight</h3><p>Global import & export shipping via certified IATA air partners and trusted vessel routes.</p></div>
-    <div class="service"><h3>🚛 Inland Transport</h3><p>Truck & rail logistics tailored to your port, warehouse, or final destination.</p></div>
-    <div class="service"><h3>🛃 Customs Clearance</h3><p>Licensed brokers handle your documentation, tariffs, HS codes and cargo release.</p></div>
-    <div class="service"><h3>🏢 Storage & Warehousing</h3><p>Safe, dry, and temperature-controlled environments for short- or long-term storage.</p></div>
+    <div class="service">
+      <h3>🌍 Air & Sea Freight</h3>
+      <p>Global import & export shipping via certified IATA air partners and trusted vessel routes.</p>
+    </div>
+    <div class="service">
+      <h3>🚛 Inland Transport</h3>
+      <p>Truck & rail logistics tailored to your port, warehouse, or final destination.</p>
+    </div>
+    <div class="service">
+      <h3>🛃 Customs Clearance</h3>
+      <p>Licensed brokers handle your documentation, tariffs, HS codes and cargo release.</p>
+    </div>
+    <div class="service">
+      <h3>🏢 Storage & Warehousing</h3>
+      <p>Safe, dry, and temperature-controlled environments for short- or long-term storage.</p>
+    </div>
   </div>
 </section>
 
 <section id="about" class="about">
   <h2>About SAFE MARINE</h2>
-  <p>SAFE MARINE is a logistics powerhouse with global reach and local expertise. We connect continents and streamline cargo journeys. Whether you're moving pallets or full containers, we ensure your shipment arrives safely and on time — every time.</p>
+  <p>SAFE MARINE is a logistics powerhouse with global reach and local expertise. With a passion for precision, we connect continents and streamline cargo journeys. Whether you're moving pallets or full containers, we make sure your shipment arrives safely and on time — every time.</p>
 </section>
 
 <section id="contact" class="contact">
@@ -347,29 +316,9 @@
 </footer>
 
 <script>
-  // Redirect if user not logged in
-  const currentUser = localStorage.getItem("loggedUser");
-  if (!currentUser) {
-    window.location.href = "login.html";
-  } else {
-    document.getElementById("userMenu").style.display = "block";
-    document.getElementById("userIcon").innerText = currentUser.charAt(0).toUpperCase();
-  }
-
-  // Dropdown toggle
-  document.getElementById("userIcon").addEventListener("click", () => {
-    const menu = document.getElementById("dropdownMenu");
-    menu.style.display = menu.style.display === "block" ? "none" : "block";
-  });
-
-  function logout() {
-    localStorage.removeItem("loggedUser");
-    window.location.href = "login.html";
-  }
-
-  // Form success animation
   const form = document.querySelector("form");
   const success = document.getElementById("success");
+
   form.addEventListener("submit", function(e) {
     e.preventDefault();
     const data = new FormData(form);
